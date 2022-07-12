@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+group 'com.everc.automation-course'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.3.0'
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.2.1")
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.23.1'
+    implementation group: 'org.aeonbits.owner', name: 'owner-java8', version: '1.0.12'
+}
+
+test {
+    useJUnitPlatform()
+}
