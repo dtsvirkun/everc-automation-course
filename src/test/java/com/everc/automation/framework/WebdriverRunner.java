@@ -9,28 +9,35 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class WebdriverRunner {
 
-    private static WebDriver webDriver;
+    private static final ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
 
     private WebdriverRunner() {
 
     }
 
     public static WebDriver getWebDriver() {
-        if (webDriver == null) {
+        if (webDriver.get() == null) {
             if (TestConfig.CONFIG.browser().equals("chrome")) {
                 WebDriverManager.chromedriver().setup();
-                webDriver = new ChromeDriver();
+                webDriver.set(new ChromeDriver());
             } else if (TestConfig.CONFIG.browser().equals("firefox")) {
                 WebDriverManager.firefoxdriver().setup();
-                webDriver = new FirefoxDriver();
+                webDriver.set(new FirefoxDriver());
             } else {
                 WebDriverManager.edgedriver().setup();
-                webDriver = new EdgeDriver();
+                webDriver.set(new EdgeDriver());
             }
 
-            webDriver.manage().window().maximize();
+            webDriver.get().manage().window().maximize();
         }
 
-        return webDriver;
+        return webDriver.get();
+    }
+
+    public static void closeWebDriver() {
+        if (webDriver.get() != null) {
+            webDriver.get().close();
+            webDriver.remove();
+        }
     }
 }

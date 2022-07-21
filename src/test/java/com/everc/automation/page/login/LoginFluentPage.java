@@ -42,7 +42,8 @@ public class LoginFluentPage extends AbstractPage {
         return this;
     }
 
-    public String getUserAccountName() {
+    public String getUserAccountName(String textExpected) {
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(accountNameText, textExpected));
         WebElement userAccountName = driver.findElement(accountNameText);
         return userAccountName.getText();
     }

@@ -7,7 +7,7 @@ import static com.everc.automation.framework.WebdriverRunner.getWebDriver;
 
 public class ElementDisplayedTest {
 
-    @Test
+//    @Test
     public void isDisplayedTest() {
         getWebDriver().get("https://output.jsbin.com/saqoca/2");
 
